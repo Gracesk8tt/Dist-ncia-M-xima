@@ -1,0 +1,34 @@
+function calcularDistancia(x1, y1, x2, y2) {
+    return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+}
+
+function maiorDistanciaFuncionarios(funcionarios) {
+    let maiorDistancia = 0;
+
+    for (let i = 0; i < funcionarios.length; i++) {
+        for (let j = i + 1; j < funcionarios.length; j++) {
+            const distancia = calcularDistancia(funcionarios[i].x, funcionarios[i].y, funcionarios[j].x, funcionarios[j].y);
+            if (distancia > maiorDistancia) {
+                maiorDistancia = distancia;
+            }
+        }
+    }
+
+    return maiorDistancia;
+}
+
+function processData(input) {
+    const linhas = input.trim().split("\n");
+    const n = parseInt(linhas[0], 10);
+
+    const funcionarios = [];
+    for (let i = 1; i <= n; i++) {
+        const coordenadas = linhas[i].split(" ");
+        const x = parseFloat(coordenadas[0]);
+        const y = parseFloat(coordenadas[1]);
+        funcionarios.push({ x, y });
+    }
+
+    const maiorDistancia = maiorDistanciaFuncionarios(funcionarios);
+    console.log (maiorDistancia);
+}
